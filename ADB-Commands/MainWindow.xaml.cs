@@ -42,7 +42,7 @@ namespace ADB_Commands
             }
 
 
-            string command="/C " ;
+            string command=" " ;
             foreach(string app in appNames)
             {
                     string appName = app.Replace(".apk", "");
@@ -51,20 +51,21 @@ namespace ADB_Commands
                 {
                     appName = char.ToUpper(appName[0]) + appName.Substring(1);
                     command += string.Format("echo Installing {0}... Please wait (usually about 30 seconds for each app) && ", appName);
-                    command += "adb install" + " " + app;
+                    command += "adb install" + " " + "../apk/" + app;
 
                 }
                 else
                 {
+                    
                     appName = char.ToUpper(appName[0]) + appName.Substring(1);
                     command += string.Format("echo Installing {0}... Please wait (usually about 30 seconds for each app) && ", appName);
-                    command += "adb install" + " " + app + "&&";
+                    command += "adb install" + " " + "../apk/" + app + "&&";
                 }
             }
             try
             {
                 
-                System.Diagnostics.Process.Start("cmd.exe", command);
+                System.Diagnostics.Process.Start("cmd.exe", ("/K cd scrcpy && " + command));
 
             }
             catch
